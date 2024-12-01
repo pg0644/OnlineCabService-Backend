@@ -19,28 +19,32 @@ import lombok.NoArgsConstructor;
 @Entity
 public class TripBooking {
 
-	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer tripBookingId;
+
 	@NotNull
 	private String pickupLocation;
+
 	@NotNull
 	private String fromDateTime;
+
 	@NotNull
 	private String dropLocation;
+
 	@NotNull
 	private String toDateTime;
+
 	@NotNull
 	private float distanceInKm;
+
 	@JsonIgnore
 	private String currStatus;
 	
 	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	private Driver driver;
-	
+
 	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	private Customer customer;

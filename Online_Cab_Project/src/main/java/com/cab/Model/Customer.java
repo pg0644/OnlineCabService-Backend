@@ -28,7 +28,7 @@ public class Customer extends User{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	private List<TripBooking> tripBooking;
 }

@@ -112,7 +112,6 @@ public class CabServiceImpl implements CabService{
 		Optional<CurrentUserSession> validuser = currRepo.findByUuidAndRole(uuid);
 		if(validuser.isPresent()) {
 			List<Cab> allCabs = cabRepo.findAll();
-			List<Cab> viewCabsOfType = new ArrayList<>();
 			Integer countCabsOfType = 0;
 
 			for(Cab cab : allCabs) {
@@ -120,12 +119,12 @@ public class CabServiceImpl implements CabService{
 					countCabsOfType++;
 				}
 			}
-			if(viewCabsOfType.isEmpty()) {
-				throw new CabException("No Cab found with the given type");
-			}
-			else {
+//			if(viewCabsOfType.isEmpty()) {
+//				throw new CabException("No Cab found with the given type");
+//			}
+//			else {
 				return countCabsOfType;
-			}
+//			}
 		}
 		else {
 			throw new CurrentUserSessionException("User not login In or User is not an Admin");

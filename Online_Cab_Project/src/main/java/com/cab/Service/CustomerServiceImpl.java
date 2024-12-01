@@ -106,7 +106,7 @@ public class CustomerServiceImpl implements CustomerService{
 	public Customer viewCustomer(Integer customerId, String uuid)
 			throws CustomerException, CurrentUserSessionException {
 		// TODO Auto-generated method stub
-		Optional<CurrentUserSession> validCustomer = currRepo.findByUuidAndRole(uuid);
+		Optional<CurrentUserSession> validCustomer = currRepo.findByUuid(uuid);
 		if(validCustomer.isPresent()) {
 			Optional<Customer> cust = customerRepo.findById(customerId);
 			if(cust.isPresent()) {

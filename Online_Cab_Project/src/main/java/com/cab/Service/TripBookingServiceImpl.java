@@ -94,9 +94,10 @@ public class TripBookingServiceImpl implements TripBookingService{
 						tripBooking.setCab(newCab);
 						tripBooking.setCustomer(customer);
 						tripBooking.setCurrStatus("Pending");
-						allTripByCustomer.add(tripBooking);
+						customer.getTripBooking().add(tripBooking);
+						tripBookingRepo.save(tripBooking);
 						customerRepo.save(customer);
-						return tripBookingRepo.save(tripBooking);
+						return tripBooking;
 						
 					}
 					else {
@@ -180,13 +181,26 @@ public class TripBookingServiceImpl implements TripBookingService{
 				    allTripByDrv.add(trip);
 				    assignDriver.setTrips(allTripByDrv);
 
+					//df
+//					trip.setCurrStatus("cancelled");
+//					TripBooking canceltrip =  tripBookingRepo.save(trip);
+
+					//df
 				    trip.setCurrStatus("confirmed");
 				    trip.setDriver(assignDriver);
+					for(TripBooking tb : allTrips) {
+						if(tb.getTripBookingId()==trip.getTripBookingId()) {
+							tb.setCurrStatus("confirmed");
+							tb.setDriver(assignDriver);
+						}
+					}
+					customer.setTripBooking(allTrips);
 
-				    List<TripBooking> allTrip = customer.getTripBooking();
-				    allTrip.add(trip);
 
-				    tripBookingRepo.save(trip);
+//					List<TripBooking> allTrip = customer.getTripBooking();
+//				    allTrip.add(trip);
+
+				   // tripBookingRepo.save(trip);
 				    customerRepo.save(customer);
 				    return trip;
 			    }
